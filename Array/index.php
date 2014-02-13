@@ -1,5 +1,3 @@
-
-
 <?php
 $persona = array ();
 // $persona[];
@@ -22,7 +20,7 @@ foreach ($persona as $key => $value){
 	echo $key.": ".print_r($value);
 	echo "<br/";
 }
-for each($persona as $per){
+foreach($persona as $per){
 	
 	
 }
