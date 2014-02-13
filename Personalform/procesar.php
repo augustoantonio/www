@@ -12,18 +12,25 @@ print_r($_FILES);
 echo "</pre>";
 echo ("<hr/>");
 //averiguar el nombre de la foto
+
+// implode: moves data form to $data variable, comma separated
+// find out the name of the file with extension
+// root folder of the site
+// pathinfo creates array with different parts of the file name separated
 $data = implode (',',$_POST)."\n";
 $photoname = $_FILES['photo']['name'];
 $serverlocation = $_SERVER["DOCUMENT_ROOT"];
-	echo ("$photoname")."<br/>";
-	echo ("$serverlocation")."<br/>";
-	echo ("$data")."<br/>";
-while (file_exists($destino."/".$photoname)){
-	$i = 1;
-	if ($photoname){
-		$photoname .= "_".$i; 
-	}
-	$i++
+$partes_ruta = pathinfo($serverlocation."/".$photoname);
+
+//Display values
+echo ("<hr/>");
+echo ("$photoname")."<br/>";
+echo ("$serverlocation")."<br/>";
+// echo ("$data")."<br/>";
+echo ("<pre>");
+print_r($partes_ruta);
+echo  ("</pre>");
+echo ("<hr/>");
 
 // Mientras que el nombre fichero exista en destino
 // si existe
@@ -31,7 +38,19 @@ while (file_exists($destino."/".$photoname)){
 // bucle hasta nombre valido
 // si no existe
 // salir con el contador
+$a = 0;
+while (file_exists($serverlocation."/".$photoname)){
+	$a++;
+	$photoname = $partes_ruta['filename']."-".$a.".".$partes_ruta['extension'];
+}
+// write final_name at POST. For what?
+$_POST =$photoname;
+
+// upload file to server
+move_uploaded_file($_FILES['photo']['temp_name'], $serverlocation."/".$photoname);
+
 //escribir fichero
+file_put_contents($photoname, $data, FILE_APPEND);
 
 /*
 //s
@@ -121,5 +140,4 @@ $destino."/".$photo_name
 // Escribir(agregar) a un archivo de texto
 file_put_contents('usuarios.txt', $data, FILE_APPEND);
 */
-
 ?>
