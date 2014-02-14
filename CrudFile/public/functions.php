@@ -11,17 +11,15 @@
 */
 function renameFile($photo_name, $destino)
 {
-	// Averiguar el nombre de la foto
-$partes_ruta = pathinfo($destino."/".$photo_name);
-
-	//Mientras que el nombre del fichero exista en destino
+// Find out photo´s name
+// While file exists
+	// check file number available for new file name
+	$partes_ruta = pathinfo($destino."/".$photo_name);
 $a=0;
 while(file_exists($destino."/".$photo_name))
 {
-	// Aumentar nombre de fichero
-$a++;
-	// Hasta obtener un nombre valido
-$photo_name=$partes_ruta['filename']."_".$a.".".$partes_ruta['extension'];
+	$a++;
+	$photo_name=$partes_ruta['filename']."_".$a.".".$partes_ruta['extension'];
 }	
 return $photo_name;
 }
@@ -35,7 +33,7 @@ return $photo_name;
 */
 function uploadFile($name, $path, $fileData)
 {
-	// Subir la foto
+// upload photo to server
 move_uploaded_file($fileData['tmp_name'],$path."/".$name);
 return null;
 }
@@ -48,26 +46,22 @@ return null;
 */
 function insert2Txt($datafile, $filename)
 {
+// Do the following for each element of $datafile array. Each element is named $filename inside
+	// If !array
+		// add as element to arraysalida[]
+	// If is array 
+		// separate values with pipes
+// Convert array to comma separated string
+// Append to file $filename
 $arraysalida=array();
-// Para cada elemento del array POST
 foreach ($datafile as $value)
 {
-// Si no es array
-if(!is_array($value))
-// Enviar a arraysalida
-$arraysalida[]=$value;
-// Si es array
-else
-// Dividir por pipes y
-// enviar a arraysalida
-$arraysalida[]=implode('|',$value);
+	if(!is_array($value))
+		$arraysalida[]=$value;
+	else
+		$arraysalida[]=implode('|',$value);
 }
-
-// Separar por comas
 $data=implode(',',$arraysalida)."\n";
-
-// Escribir(agregar) a un archivo de texto
 file_put_contents($filename, $data, FILE_APPEND);
-
 return null;
 }

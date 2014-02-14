@@ -13,19 +13,19 @@
 		Id: <input type="hidden" value="1" name="id"/>
 	</li>
 	<li>
-		Nombre: <input type="text" name="name"/>
+		Nombre: <input type="text" name="name"/ value="">
 	</li>
 	<li>
-		Apellidos: <input type="text" name="lastname"/>
+		Apellidos: <input type="text" name="lastname" value=""/>
 	</li>
 	<li>
-		Email: <input type="text" name="email"/>
+		Email: <input type="text" name="email" value=""/>
 	</li>
 	<li>
-		Password: <input type="password" name="password"/>
+		Password: <input type="password" name="password" value=""/>
 	</li>
 	<li>
-		Descripcion: <textarea rows="10" cols="10" name="description"></textarea>
+		Descripcion: <textarea rows="10" cols="10" name="description"> value=""</textarea>
 	</li>
 	<li>
 		Ciudad: <select name="cities">
