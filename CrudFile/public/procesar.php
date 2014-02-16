@@ -26,14 +26,18 @@ print_r($_FILES);
 echo "</pre>";
 include '/functions.php';
 
-$photo_name = renameFile($_FILES['photo']['name'], $_SERVER['DOCUMENT_ROOT']);
+$photo_name = renameFile($_FILES['photo']['name'],
+			 $_SERVER['DOCUMENT_ROOT']);
 $destino = $_SERVER['DOCUMENT_ROOT'];
 $partes_ruta = pathinfo($destino."/".$photo_name);
 
 $_FILES['photo']['name'] = $photo_name;
 
 uploadFile($photo_name, $destino, $_FILES['photo']);
-
+$_POST['id'] = calcIndexByfilename('usuarios.txt');
+echo "<pre> Post despues: ";
+print_r($_POST);
+echo "</pre>";
 insert2Txt($_POST,'usuarios.txt');
-// header("location: /select.php/");
+header("location: /select.php/");
 ?>

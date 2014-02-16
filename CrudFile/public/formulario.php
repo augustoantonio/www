@@ -13,7 +13,7 @@
 		Id: <input type="hidden" value="1" name="id"/>
 	</li>
 	<li>
-		Nombre: <input type="text" name="name"/ value="">
+		Nombre: <input type="text" name="name" value="">
 	</li>
 	<li>
 		Apellidos: <input type="text" name="lastname" value=""/>
@@ -25,7 +25,7 @@
 		Password: <input type="password" name="password" value=""/>
 	</li>
 	<li>
-		Descripcion: <textarea rows="10" cols="10" name="description"> value=""</textarea>
+		Descripcion: <textarea rows="10" cols="10" name="description"> </textarea>
 	</li>
 	<li>
 		Ciudad: <select name="cities">

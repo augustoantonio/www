@@ -22,7 +22,6 @@ foreach ($persona as $key => $value){
 }
 foreach($persona as $per){
 	
-	
 }
 echo $persona['edad'];
 

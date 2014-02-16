@@ -14,17 +14,26 @@
 	// Show image
 	// Show buttons
 // Close table
+
+include '/functions.php';
+
 $archivostring = file_get_contents('usuarios.txt');
 $filas = explode("\n",$archivostring);
-
+// $index2delete = calcIdAvailable($filas);
+//echo "$index2delete";
+//die;
 echo "<a href=\"/usuarios.php?action=insert\">Insertar Usuario</a>";
 echo "<br/>";
 echo "<table border=1>";
 
 foreach($filas as $fila)
 {
+	
+	
 	echo "<tr>";
+	//dibuja cada elemento del primer array en su celda
 	$columnas = explode(',',$fila);
+	// la imagen es el ultimo elemento, la borra
 	$image = array_pop($columnas);
 	foreach ($columnas as $columna)
 	{
@@ -37,11 +46,16 @@ foreach($filas as $fila)
 	echo "<img width=\"100px\" src=\"".$image."\"/>";	
 	echo "</td>";
 	echo "<td>";
-	
+	// esta es la id del registro a borrar
+	$iidToWorkWith = explode (",",$fila);
+	echo $iidToWorkWith[0];
+	echo "<a href=\"/update.php\">Updat</a>";
+	echo "<a href=\"/delete.php\">Delet</a>";
+	/*
 	echo "<a href=\"/usuarios.php?action=update\">Update</a>";
-	echo "&nbsp;";
-	echo "<a href=\"/usuarios.php?action=delete\">Delete</a>";
-	echo "</td>";
-	echo "</tr>";
+echo "&nbsp;";
+echo "<a href=\"/usuarios.php?action=delete\">Delete</a>";
+echo "</td>";
+*/
 }
 echo "</table>";
