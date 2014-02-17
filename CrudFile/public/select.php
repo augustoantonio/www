@@ -49,9 +49,25 @@ foreach($filas as $fila)
 	// esta es la id del registro a borrar
 	$iidToWorkWith = explode (",",$fila);
 	echo $iidToWorkWith[0];
-	echo "<a href=\"/update.php\">Updat</a>";
-	echo "<a href=\"/delete.php\">Delet</a>";
+	$query_string = 'fila='.urlencode($fila);
+	echo '<a href="/update.php?'.htmlentities($query_string).'">Update</a>'.' ';
+	echo '<a href="/delete.php?'.htmlentities($query_string).'">Delete</a>';
 	/*
+	$num = 5;
+	$location = 'tree';
+	
+	$format = 'There are %d monkeys in the %s';
+	echo sprintf($format, $num, $location);
+	?>
+		
+<?php
+$query_string = 'foo=' . urlencode($foo) . '&bar=' . urlencode($bar);
+echo '<a href="mycgi?' . htmlentities($query_string) . '">';
+?>
+	
+	echo "<a href=\"/update.php?id=\">Updat</a>";
+	echo "<a href=\"/delete.php\">Delet</a>";
+	
 	echo "<a href=\"/usuarios.php?action=update\">Update</a>";
 echo "&nbsp;";
 echo "<a href=\"/usuarios.php?action=delete\">Delete</a>";
