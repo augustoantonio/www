@@ -1,23 +1,28 @@
 <?php
+echo '<pre>'.'POST: ';
+print_r($_POST);
+echo '</pre>';
+echo '<pre>'.'GET: ';
+print_r($_GET);
+echo '</pre>';
+echo '<pre>'.'FILES: ';
+print_r($_FILES);
+echo '</pre>';
 
-include ('../application/models/models_txtfile.php');
-include ('../application/models/models_uploadfile.php');
-
-$config = parse_ini_file('../application/configs/settings.ini');
+include ('functions.php');
 
 if(isset($_GET['action']))
 	$action=$_GET['action'];
 else
 	$action='select';
 
-
-
 switch ($action)
 {
 	case 'update':
+		echo "esto es update";
 		if ($_POST)
 		{
-			$data=getArrayFromTxt($config['file']);
+			$data=getArrayFromTxt('usuarios.txt');
 			$arrayout=getUserLine($_POST);
 			$arrayuser=mapUser2File($arrayout);
 			$usuario = implode(',',$arrayuser);
@@ -33,10 +38,7 @@ switch ($action)
 			// Tomar el id
 			$usuario=getUserData($_GET['id']);			
 			// Pasarla al formulario
-			ob_start();
-				include('../application/views/usuarios/insert.php');
-				$content=ob_get_contents();
-			ob_end_clean();
+			include('formulario.php');
 		}
 	break;
 	
@@ -49,7 +51,7 @@ switch ($action)
 			// Inyectar nombre_final en post.			
 			$_POST[]= $photo_name;			
 			uploadFile($photo_name, $destino, $_FILES['photo']);
-			insert2Txt($_POST, $config['file']);			
+			insert2Txt($_POST, 'usuarios.txt');			
 			// Saltar a tabla de usuarios
 			// header('Location: http://formularios.local/usuarios.php');
 			header('Location: /usuarios.php');
@@ -57,10 +59,8 @@ switch ($action)
 		}
 		else
 		{
-			ob_start();
-			include('../application/views/usuarios/insert.php');
-			$content=ob_get_contents();
-			ob_end_clean();
+			echo "esto es insert";
+			include('formulario.php');
 		}		
 	break;
 	
@@ -69,7 +69,7 @@ switch ($action)
 		{			
 			if($_POST['borrar']=="Si")
 			{
-				$data=getArrayFromTxt($config['file']);
+				$data=getArrayFromTxt('usuarios.txt');
 				unset($data[$_POST['id']]);
 				// TODO: delete image
 				wrt2File('usuarios.txt', $data);				
@@ -79,31 +79,61 @@ switch ($action)
 		else
 		{
 			$usuario=getUserData($_GET['id']);
-			ob_start();
-				include('../application/views/usuarios/delete.php');	
-				$content=ob_get_contents();
-			ob_end_clean();
+			include('formulario_delete.php');			
 		}		
 	break;
 	
 	case 'select':
+		echo "esto es select";
 		// Leer archivo de texto y guardar datos en un string
-		$archivostring = file_get_contents($config['file']);
+		$archivostring = file_get_contents('usuarios.txt');
 		// Separar string por lineas en un array filas
 		$filas = explode("\n",$archivostring);
-		ob_start();
-			include ('../application/views/usuarios/select.phtml');
-			$content=ob_get_contents();
-		ob_end_clean();
+		echo "<a href=\"/usuarios.php?action=insert\">Insertar Usuario</a>";
+		echo "<br/>";
+		
+		// Dibujo la tabla
+		echo "<table border=1>";
+		// Para cada fila
+		foreach($filas as $key => $fila)
+		{
+			// Dibujo la fila
+			echo "<tr>";
+			// Separar el string de filas en array columnas
+			$columnas = explode(',',$fila);
+			
+			$image = array_pop($columnas);
+			
+			// Para cada columna
+			foreach ($columnas as $columna)
+			{
+				// Dibujar columna
+				echo "<td>";
+				// Poner contenido
+				echo $columna;
+				echo "</td>";		
+			}
+				// Mostrar imagen
+				echo "<td>";
+				echo "<img width=\"100px\" src=\"".$image."\"/>";		
+				echo "</td>";
+				
+				// Mostrar opciones
+				echo "<td>";
+				echo "<a href=\"/usuarios.php?action=update&id=".$key."\">Update</a>";
+				echo "&nbsp;";
+				echo "<a href=\"/usuarios.php?action=delete&id=".$key."\">Delete</a>";
+				echo "</td>";
+				
+				
+			echo "</tr>";
+		}
+		echo "</table>";		
 	break;
 	
 	default:
 	break;
 }
 
-// Include Layuout
-include('../application/views/layouts/layout.phtml');
 
-
-
-
+?>

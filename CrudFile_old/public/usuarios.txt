@@ -1,0 +1,13 @@
+1,Vilma,Picapiedra,vilma@asdf.com,2, 1,santiago,m,gato|perro|tigre|lobo,english,Enviar consulta
+2,Dino,Saurio,dino@,d, d,acoruña,o,gato,english,Enviar consulta
+3,Tronco,Movil,vilma@asdf.com,d, sdf,vigo,o,perro,galego,Enviar consulta
+4,Tronco,Movil,vilma@asdf.com,d, sdf,vigo,o,perro,galego,Enviar consulta
+5,Pedro,Mármol,vilma@asdf.com,s, s,santiago,o,gato,english,Enviar consulta
+6,Pedro,Mármol,vilma@asdf.com,, s,santiago,o,gato,english,Enviar consulta
+7,Pedro,Mármol,vilma@asdf.com,, s,santiago,o,gato,english,Enviar consulta
+8,Pedro,Mármol,vilma@asdf.com,, s,santiago,o,gato,english,Enviar consulta
+9,Pedro,Mármol,vilma@asdf.com,, s,santiago,o,gato,english,Enviar consulta
+10,Pedro,Mármol,vilma@asdf.com,, s,santiago,o,gato,english,Enviar consulta
+11,Pedro,Mármol,vilma@asdf.com,, s,santiago,o,gato,english,Enviar consulta
+12,Pedro,Mármol,vilma@asdf.com,, s,santiago,o,gato,english,Enviar consulta
+13,,,,, ,santiago,Enviar consulta

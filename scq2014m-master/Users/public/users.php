@@ -1,9 +1,14 @@
 <?php
 
-include ('../application/models/models_txtfile.php');
-include ('../application/models/models_uploadfile.php');
+// include ('../application/models/models_txtfile.php');
+// include ('../application/models/models_uploadfile.php');
 
-$config = parse_ini_file('../application/configs/settings.ini');
+include ('../application/model/model_users.php');
+$config = parse_ini_file('../application/configs/settings.ini', TRUE);
+
+// echo "<pre>";
+// print_r($config);
+// echo "</pre>";
 
 if(isset($_GET['action']))
 	$action=$_GET['action'];
@@ -31,25 +36,25 @@ switch ($action)
 		else
 		{
 			// Tomar el id
-			$usuario=getUserData($_GET['id']);			
+			$usuario=getUserData($_GET['id']);
 			// Pasarla al formulario
 			ob_start();
-				include('../application/views/usuarios/insert.php');
-				$content=ob_get_contents();
+			include('../application/views/usuarios/insert.php');
+			$content=ob_get_contents();
 			ob_end_clean();
 		}
-	break;
-	
+		break;
+
 	case 'insert':
 		if ($_POST)
 		{
 			$photo_name = renameFile($_FILES['photo']['name'],
 					$_SERVER['DOCUMENT_ROOT']);
-			$destino = $_SERVER['DOCUMENT_ROOT'];			
-			// Inyectar nombre_final en post.			
-			$_POST[]= $photo_name;			
+			$destino = $_SERVER['DOCUMENT_ROOT'];
+			// Inyectar nombre_final en post.
+			$_POST[]= $photo_name;
 			uploadFile($photo_name, $destino, $_FILES['photo']);
-			insert2Txt($_POST, $config['file']);			
+			insert2Txt($_POST, $config['file']);
 			// Saltar a tabla de usuarios
 			// header('Location: http://formularios.local/usuarios.php');
 			header('Location: /usuarios.php');
@@ -61,18 +66,18 @@ switch ($action)
 			include('../application/views/usuarios/insert.php');
 			$content=ob_get_contents();
 			ob_end_clean();
-		}		
-	break;
-	
+		}
+		break;
+
 	case 'delete':
 		if($_POST)
-		{			
+		{
 			if($_POST['borrar']=="Si")
 			{
 				$data=getArrayFromTxt($config['file']);
 				unset($data[$_POST['id']]);
 				// TODO: delete image
-				wrt2File('usuarios.txt', $data);				
+				wrt2File('usuarios.txt', $data);
 			}
 			header('Location: /usuarios.php');
 		}
@@ -80,25 +85,22 @@ switch ($action)
 		{
 			$usuario=getUserData($_GET['id']);
 			ob_start();
-				include('../application/views/usuarios/delete.php');	
-				$content=ob_get_contents();
+			include('../application/views/usuarios/delete.php');
+			$content=ob_get_contents();
 			ob_end_clean();
-		}		
-	break;
-	
+		}
+		break;
+
 	case 'select':
-		// Leer archivo de texto y guardar datos en un string
-		$archivostring = file_get_contents($config['file']);
-		// Separar string por lineas en un array filas
-		$filas = explode("\n",$archivostring);
+		$filas=getUsers($config['database']);
 		ob_start();
-			include ('../application/views/usuarios/select.phtml');
+			include ('../application/views/users/select.phtml');
 			$content=ob_get_contents();
 		ob_end_clean();
-	break;
-	
+		break;
+
 	default:
-	break;
+		break;
 }
 
 // Include Layuout
