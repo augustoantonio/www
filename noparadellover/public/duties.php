@@ -1,15 +1,20 @@
 <?php
 
+
+
+
 // include ('../application/models/models_txtfile.php');
 include ('../application/model/model_uploadfile.php');
 
 include ('../application/model/model_users.php');
 $config = parse_ini_file('../application/configs/settings.ini', TRUE);
 
-// echo "<pre>";
-// print_r($config);
-// echo "</pre>";
 
+// $s = $config['db_projects'];
+// echo '<pre>: $_config:';
+// print_r($s);
+// echo '</pre>'.'</br>';
+// die;
 
 if(isset($_GET['action']))
 	$action=$_GET['action'];
@@ -23,58 +28,52 @@ switch ($action)
 	case 'update':
 		if ($_POST)
 		{
-			update('users', $_POST, $_POST['iduser'],$config['database']);
+			update('projects', $_POST, $_POST['idproject'],$config['db_projects']);
 			// TODO: revolve show images issue
-			header('Location: /users.php');
+			header('Location: /duties.php');
 		}
 		else
 		{
-			$usuario=getUser($_GET['id'], $config['database']);
+			$usuario=getUser($_GET['id'], $config['db_projects']);
 			ob_start();
-				include('../application/views/users/insert.php');
+				include('../application/views/users/insert_duties.php');
 				$content=ob_get_contents();
 			ob_end_clean();
 		}
 		break;
 
 	case 'insert':
+
 		if ($_POST)
 		{
-			$photo_name = renameFile($_FILES['photo']['name'],
-					$_SERVER['DOCUMENT_ROOT']);
-			$destino = $_SERVER['DOCUMENT_ROOT'];
-			// Inyectar nombre_final en post.
-			if(isset($photo_name)&&$photo_name!=='')
-				$_POST['photo']= $photo_name;
-			uploadFile($photo_name, $destino, $_FILES['photo']);
-			insert('users', $_POST, $_POST['iduser'],$config['$db']);
+			insertProject('projects', $_POST, $_POST['idproject'],$config['db_projects']);
+			// insert('users', $_POST, $_POST['iduser'],$config['$db']);
 			// Saltar a tabla de usuarios
 			// header('Location: http://formularios.local/usuarios.php');
-			header('Location: /users.php');
+			header('Location: /duties.php');
 			// header('Location: usuarios.php');
 		}
 		else
 		{
 			ob_start();
-			include('../application/views/users/insert.php');
+			include('/insert_duties.php');
 			$content=ob_get_contents();
 			ob_end_clean();
 		}
-		break;
 
 	case 'delete':
 		if($_POST)
 		{
 			if($_POST['borrar']=="Si")
 			{
-				deleteUser($_POST['id'],$config['database']);
+				deleteUser($_POST['id'],$config['db_projects']);
 				// TODO: delete image				
 			}
 			header('Location: /users.php');
 		}
 		else
 		{
-			$usuario=getUser($_GET['id'], $config['database']);
+			$usuario=getUser($_GET['id'], $config['db_projects']);
 			ob_start();
 				include('../application/views/users/delete.php');
 				$content=ob_get_contents();
@@ -83,9 +82,9 @@ switch ($action)
 		break;
 
 	case 'select':
-		$filas=getUsers($config['database']);
+		$filas=getProjects($config['db_projects']);
 		ob_start();
-			include ('../application/views/users/select.phtml');
+			include ('../application/views/users/select_project.phtml');
 			$content=ob_get_contents();
 		ob_end_clean();
 		break;

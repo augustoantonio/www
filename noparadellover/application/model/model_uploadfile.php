@@ -1,5 +1,18 @@
 <?php
 
+// 	echo '<pre>: $_GET:';
+// 		print_r($_GET);
+// 	echo '</pre>'.'</br>';
+
+// 	echo '<pre>: $_POST:';
+// 	print_r($_POST);
+// 	echo '</pre>'.'</br>';
+
+// 	echo '<pre>: $_FILES:';
+// 	print_r($_FILES);
+// 	echo '</pre>'.'</br>';
+// 	die;
+
 /**
  * Rename file with a counter
  *

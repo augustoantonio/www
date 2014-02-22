@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 function getUsers($config)
 {	
 	$sql="SELECT users.iduser,
@@ -140,8 +143,7 @@ function updateUser($iduser, $data, $config)
 	{
 		$sql.=$key."='".$value."',";
 	} 
-			echo $sql;
-			die;
+
 
 	$link=connectDB($config);
 	selectDB($link, $config);
@@ -204,13 +206,31 @@ function insert($tablename, $data, $id, $config)
 	return $result;
 }
 
+function getProjects($config)
+{
+	$sql="SELECT 	projects.idproject, projects.alias, projects.name,
+						project_types.idproject_type as type,
+						companies.idcompany as company
+FROM projects, project_types, companies
+WHERE projects.idproject = project_types.idproject_type && projects.idproject = companies.idcompany;";
 
-
-
-
-
-
-
-
-
-
+	$link=connectDB($config);
+	selectDB($link, $config);
+	$result=mysqli_query($link, $sql);
+	// object(mysqli_result)#2 (5) {
+	//	["current_field"]=> int(0)	["field_count"]=> int(5) 
+	//	["lengths"]=> NULL			["num_rows"]=> int(1)	["type"]=> int(0) }
+	// var_dump ($result);
+	// die;
+	while ($row=mysqli_fetch_assoc($result))
+	{
+// 		echo '<pre> $row:';
+// 			print_r($row);
+// 		echo '</pre>';
+// 		die;
+// 		$row['pets']=getPets($row['iduser'], $config);
+// 		$row['languages']=getLanguages($row['iduser'], $config);
+		$rows[]=$row;
+	}
+	return $rows;
+}

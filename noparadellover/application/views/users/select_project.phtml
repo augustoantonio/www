@@ -1,29 +1,36 @@
 
 
 
-<h2 class="sub-header">Usuarios</h2>
-<a href="?action=insert">Insertar Usuario</a>
+<h2 class="sub-header">Projectos</h2>
+<a href="?action=insert">Insertar Proyecto</a>
 <br/>
 <table class="table table-striped">
 <?php
+// 	echo '<pre>: $_GET:';
+// 		print_r($_GET);
+// 	echo '</pre>'.'</br>';
+
+// 	echo '<pre>: $_POST:';
+// 	print_r($_POST);
+// 	echo '</pre>'.'</br>';
+
+// 	echo '<pre>: $_FILES:';
+// 	print_r($_FILES);
+// 	echo '</pre>'.'</br>';
+//  	die;
 
 foreach($filas as $key => $fila):?>
 	<tr>
 		<?php 
-		$image = $fila['photo'];
-		unset($fila['photo']);
 		foreach ($fila as $columna):?>
 			<td><?=$columna;?></td>
 		<?php endforeach; ?>
-		<td>
-			<img width="75px" src="<?='/uploads/'.$image;?>"/>
-		</td>	
+
 		<td>
 			<a href="?action=update&id=<?=$fila['iduser'];?>">Update</a>
 				&nbsp;
 			<a href="?action=delete&id=<?=$fila['iduser'];?>">Delete</a>
 				&nbsp;
-			<a href="?action=newduty&id=<?=$fila['iduser'];?>">New duty</a>
 		</td>
 	</tr>
 <?php endforeach ?>
