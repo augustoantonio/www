@@ -19,6 +19,25 @@ else
 
 switch ($action)
 {
+	case 'newduty':
+		if ($_POST)
+		{
+			update('users', $_POST, $_POST['iduser'],$config['database']);
+			//updateUser($_POST['id'], $_POST, $config['database']);
+			// TODO: Implementar cambiar imagen
+			// Saltar a tabla de usuarios
+			header('Location: /users.php');
+		}
+		else
+		{
+			$usuario=getUser($_GET['id'], $config['database']);
+			// Pasarla al formulario
+			ob_start();
+			include('../application/views/users/insert_duties.php');
+			$content=ob_get_contents();
+			ob_end_clean();
+		}
+		break;
 	case 'update':
 		if ($_POST)
 		{

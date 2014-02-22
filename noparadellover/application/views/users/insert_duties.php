@@ -1,5 +1,17 @@
 <form method="post" enctype="multipart/form-data">
-	<ul> 
+	
+	<h3> -- ..//application/views/users/insert_duties.php --</h3> 
+
+<!--	<?php 	echo '<pre> $_GET: ';
+				print_r($_GET);
+			echo '<pre>';
+			echo '<pre> $_POST: ';
+			print_r($_POST);
+			echo '<pre>';
+	?>
+-->	
+	
+	<ul>
 		<li>
 			Id: <input type="hidden" name="iduser" value="<?=isset($usuario['iduser'])?$_GET['id']:'-';?>"/>
 		</li>
@@ -28,28 +40,8 @@
 			<option value="3" <?=(isset($usuario['cities_idcity'])&&$usuario['cities_idcity']=='acoruña')?'selected':'';?>>A Coruña</option>
 			</select>
 		</li>
+
 		
-		<li>
-			Sexo: 
-			Otros: <input type="radio" value="1" name="genders_idgender" <?=(isset($usuario['genders_idgender'])&&$usuario['genders_idgender']=='o')?'checked':'';?>/>
-			Mujer: <input type="radio" value="2" name="genders_idgender" <?=(isset($usuario['genders_idgender'])&&$usuario['genders_idgender']=='m')?'checked':'';?>/>
-			Hombre: <input type="radio" value="3" name="genders_idgender" <?=(isset($usuario['genders_idgender'])&&$usuario['genders_idgender']=='h')?'checked':'';?>/>
-		</li>
-		<li>
-			Mascotas: 
-			Gato <input type="checkbox" value="gato" name="pets[]" <?=(isset($usuario['pets'])&&in_array('gato', $usuario['pets']))?'checked':'';?>/>
-			Perro <input type="checkbox" value="perro" name="pets[]" <?=(isset($usuario['pets'])&&in_array('perro', $usuario['pets']))?'checked':'';?>/>
-			Tigre <input type="checkbox" value="tigre" name="pets[]" <?=(isset($usuario['pets'])&&in_array('tigre', $usuario['pets']))?'checked':'';?>/>
-			Lobo <input type="checkbox" value="lobo" name="pets[]" <?=(isset($usuario['pets'])&&in_array('lobo', $usuario['pets']))?'checked':'';?>/>
-		</li>
-		<li>
-			Idiomas: 
-			<select multiple name="languages[]">
-			<option value="english" <?=(isset($usuario['languages'])&&in_array('english', $usuario['languages']))?'selected':'';?>>English</option>
-			<option value="galego" <?=(isset($usuario['languages'])&&in_array('galego', $usuario['languages']))?'selected':'';?>>Galego</option>
-			<option value="spanish" <?=(isset($usuario['languages'])&&in_array('spanish', $usuario['languages']))?'selected':'';?>>Español</option>
-			</select>
-		</li>
 		<li>
 			Foto: <input type="file" name="photo"/>
 			<?php 
@@ -68,7 +60,9 @@
 			Reset: <input type="reset" name="reset"/>
 		</li>
 		<li>
-			Button: <input type="button" name="button" value="Un boton"/>
+		
+			Button: <input type="button" name="communicate" value="send to <?=isset($usuario['username'])?$usuario['username']:'';?>"/>
+			<!--   Button: <input type="button" name="comunicate to " value="Un boton"/>-->
 		</li>
 	
 	</ul>

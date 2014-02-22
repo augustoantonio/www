@@ -1,5 +1,5 @@
 <form method="post" enctype="multipart/form-data">
-	<ul> 
+	<ul>
 		<li>
 			Id: <input type="hidden" name="iduser" value="<?=isset($usuario['iduser'])?$_GET['id']:'-';?>"/>
 		</li>
