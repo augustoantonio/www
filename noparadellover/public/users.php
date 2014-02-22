@@ -1,5 +1,4 @@
 <?php
-
 // include ('../application/models/models_txtfile.php');
 include ('../application/model/model_uploadfile.php');
 
@@ -9,6 +8,7 @@ $config = parse_ini_file('../application/configs/settings.ini', TRUE);
 // echo "<pre>";
 // print_r($config);
 // echo "</pre>";
+
 
 if(isset($_GET['action']))
 	$action=$_GET['action'];
