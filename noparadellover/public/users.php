@@ -6,20 +6,49 @@ include ('../application/model/model_uploadfile.php');
 include ('../application/model/model_users.php');
 $config = parse_ini_file('../application/configs/settings.ini', TRUE);
 
-// echo "<pre>";
-// print_r($config);
-// echo "</pre>";
+echo '<pre> $GET';
+print_r($_GET);
+echo '</pre>'.'</BR>';
 
+echo '<pre> $POST';
+print_r($_POST);
+echo '</pre>'.'</BR>';
 
 if(isset($_GET['action']))
 	$action=$_GET['action'];
 else
 	$action='select';
 
-
-
+echo $action;
+		
 switch ($action)
 {
+	
+	
+	case 'insert_duty':
+		if ($_POST)
+		{
+			
+			insertDuty ('users', $_POST, $_POST['iduser'],$config['databa']);
+			// Saltar a tabla de usuarios
+			// header('Location: http://formularios.local/usuarios.php');
+			echo 'antes del header al users.php';
+			die;
+			header('Location: /users.php');
+			// header('Location: usuarios.php');
+		}
+		else
+		{
+			$usuario=getUser($_GET['id'], $config['database']);
+			echo 'aqui llego bien';
+			// ob_start();
+			include('/insert_duties.php');
+			$content=ob_get_contents();
+			//ob_end_clean();
+			// aqui llega
+	
+		}
+// 		break;
 	case 'update':
 		if ($_POST)
 		{

@@ -56,7 +56,7 @@ switch ($action)
 		else
 		{
 			ob_start();
-			include('/insert_duties.php');
+			include('../application/views/users/insert_duties.php');
 			$content=ob_get_contents();
 			ob_end_clean();
 		}
