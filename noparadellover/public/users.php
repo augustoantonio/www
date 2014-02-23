@@ -53,13 +53,37 @@ switch ($action)
 					FROM  	noparadellover.duties;";
 				$filas = getQuery($sql, $config['db_projects']);
 
-				
 				ob_start();
 				include('../application/views/users/insert_duties.php');
 				$content=ob_get_contents();	
 				ob_end_clean();
 			}
 		break;
+		
+		case 'update_duty':
+			if ($_POST)
+			{
+				
+// 				echo '<pre> $POST';
+// 				print_r($_POST);
+// 				echo '</pre>'.'</BR>';
+				updateDuty('noparadellover.duties', $_POST, $config['db_projects']);
+
+				header('Location: /users.php');
+			}
+			else
+			{
+				$sql = "SELECT 	noparadellover.duties.idduty as idduty,
+							noparadellover.duties.duty	as duty
+		
+					FROM  	noparadellover.duties;";
+				$filas = getQuery($sql, $config['db_projects']);
+				ob_start();
+				include('../application/views/users/insert_duties.php');
+				$content=ob_get_contents();
+				ob_end_clean();
+			}
+			break;
 		
 		case 'delete_duty':
 			

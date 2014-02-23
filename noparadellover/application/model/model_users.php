@@ -111,7 +111,53 @@ function deleteDuty($tablename, $id, $config)
 	return;
 }
 
+function updateDuty($tablename, $data, $config)
+{
+	// 	echo '<pre> $config';
+	// 	print_r($config);
+	// 	echo '</pre>';
+	// 	echo $tablename."</br>";
+// 		echo '<pre> $data';
+// 		print_r($data);
+// 		echo '</pre>';
+		// 	echo $id;
+		// 	$configArray
+		// 	(
+		// 			[host] => localhost
+		// 			[user] => root
+		// 			[password] =>
+		// 			[db] => noparadellover
+		// 	)
 	
+		// 	noparadellover.duties
+	
+		// 	$dataArray
+		// 	(
+		// 			[dutyid] => 10
+		// 			[dutyname] => Consultor
+		// 			[submit] => Enviar consulta
+		// 	10
+		// 	$x = array_pop($data);
+			echo '<pre> $data before findfields';
+			print_r($data);
+			echo '</pre>';
+		$sql = "UPDATE ".$tablename." SET duty ='".$data['duty']."'
+				WHERE idduty = ".$data['idduty'];
+		echo $sql;
+				
+		$fields= findFields($tablename, $data, $config);
+// 			echo '<pre> $data despues findfields';
+// 				print_r($fields);
+// 			echo '</pre>';
+// 			die;
+	
+		$link=connectDB($config);
+		selectDB($link, $config);
+		$result=mysqli_query($link, $sql);
+		return;
+	
+	
+}
 	
 
 function deleteUser($iduser, $config)
@@ -206,6 +252,7 @@ function update($tablename, $data, $id, $config)
 	$result=mysqli_query($link, $sql);
 	return $result;	
 }
+
 
 function insert($tablename, $data, $id, $config)
 {

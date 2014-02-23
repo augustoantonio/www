@@ -2,10 +2,28 @@
 
 // echo '<pre> $filas: ';
 // print_r($filas);
-// echo '</pre>;'
-// print_r ($filas);
 // echo '</pre>';
-// die;
+
+// echo '<pre> $get: ';
+// print_r($_GET);
+// echo '</pre>';
+
+
+// recorrer RECORDSET
+// hacer FUNCION.
+foreach ($filas as $key => $value)
+{
+// cada $value es un array de valores si le decimos que
+// cuando coincida la clave de recorrido con el valor que le digamos
+// guarde el contenido del campo duty en la variable $
+	if (!$key==$_GET['id']) {
+		$duty2update= $value['duty'];
+		//var_dump($value);
+	}
+}
+
+
+
 
 /*
  * 
@@ -22,23 +40,19 @@
   		<?=$freeindex?>
  */
 
-
-
-
-
-
  ?>
-<h2> --- /application/views/users/insert_duties.php ---</h2>
+ <?php ?>
+<h2> /application/views/users/insert_duties.php</h2>
 <form method="post" enctype="multipart/form-data">
 	
 	<LABEL>introduce el nombre para la nueva tarea</LABEL>
 	<ul>
 		<li>
-			Id: <input type="hidden" name="idduty" value="-"/>
+			Id: <input type="hidden" name="idduty" value="<?=$_GET['id']?>"/>
 		</li>
 	
 		<li>
-			<input type="text" name="duty" value=""/>
+			<input type="text" name="duty" value="<?=$duty2update?>"/>
 		</li>
 
 		
