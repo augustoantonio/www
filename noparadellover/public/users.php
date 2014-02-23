@@ -9,7 +9,7 @@ $config = parse_ini_file('../application/configs/settings.ini', TRUE);
 // echo '<pre> $GET';
 // print_r($_GET);
 // echo '</pre>'.'</BR>';
-
+// die;
 // echo '<pre> $POST';
 // print_r($_POST);
 // echo '</pre>'.'</BR>';
@@ -22,25 +22,24 @@ else
 switch ($action)
 {
 	case 'select_project':
+		
 		// TODO: move all sql query to setting.ini as an array with action as key
 		
-		$sql = "SELECT		noparadellover.projects.idproject as projectid,
-			noparadellover.projects.alias as projectalias,
-			noparadellover.projects.name as projectname,
-			noparadellover.projects.tweet as projecttweet,
-			noparadellover.projects.budget as projectbudget,
-			noparadellover.projects.date_ini as projectdateini,
-			noparadellover.projects.date_fini as projectfini,
-			noparadellover.projects.description as projectdescription,
-			noparadellover.duties.duty as projectduties,
-			noparadellover.companies.name as projectcompany
-
-	FROM  	noparadellover.projects, noparadellover.duties,
-			noparadellover.companies
-	GROUP BY noparadellover.projects.alias;";
+		$sql = "SELECT	noparadellover.projects.idproject as projectid,
+						noparadellover.projects.alias as projectalias,
+						noparadellover.projects.name as projectname,
+						noparadellover.projects.tweet as projecttweet,
+						noparadellover.projects.budget as projectbudget,
+						noparadellover.projects.date_ini as projectdateini,
+						noparadellover.projects.date_fini as projectfini,
+						noparadellover.projects.description as projectdescription,
+						noparadellover.duties.duty as projectduties,
+						noparadellover.companies.name as projectcompany
+				FROM  	noparadellover.projects, noparadellover.duties,
+						noparadellover.companies
+				GROUP BY noparadellover.projects.alias;";
 	
 		$filas = getQuery($sql, $config['db_projects']);
-		// $filas=getProjectsperId(1,$config['db_projects']);
 		ob_start();
 		include ('../application/views/users/select_project.phtml');
 		$content=ob_get_contents();
@@ -61,10 +60,11 @@ switch ($action)
 		}
 		else
 		{
-			$sql = "SELECT 		noparadellover.duties.idduty as dutyid,
-			noparadellover.duties.duty	as dutyname
-				
-	FROM  	noparadellover.duties;";
+			$sql = "SELECT 	noparadellover.duties.idduty as dutyid,
+							noparadellover.duties.duty	as dutyname
+					
+					FROM  	noparadellover.duties;";
+			
 			$filas = getQuery($sql, $config['db_projects']);
 			// $filas=getProjectsperId(1,$config['db_projects']);
 			ob_start();
@@ -73,6 +73,44 @@ switch ($action)
 			ob_end_clean();
 			break;
 		}
+		break;
+		
+		
+		case 'insert_duty':
+		
+			if ($_POST)
+			{
+				$photo_name = renameFile($_FILES['photo']['name'],
+						$_SERVER['DOCUMENT_ROOT']);
+				$destino = $_SERVER['DOCUMENT_ROOT'];
+				// Inyectar nombre_final en post.
+				if(isset($photo_name)&&$photo_name!=='')
+					$_POST['photo']= $photo_name;
+				uploadFile($photo_name, $destino, $_FILES['photo']);
+				insert('users', $_POST, $_POST['iduser'],$config['$db']);
+				// Saltar a tabla de usuarios
+				// header('Location: http://formularios.local/usuarios.php');
+				header('Location: /users.php');
+				// header('Location: usuarios.php');
+			}
+			else
+			{
+							echo 'entra en else';
+							echo '<pre> $GET';
+							print_r($_GET);
+							echo '</pre>'.'</BR>';
+					
+							echo '<pre> $POST';
+							print_r($_POST);
+							echo '</pre>'.'</BR>';
+							die;
+				ob_start();
+				$content=ob_get_contents();
+					
+				include('../application/views/users/insert_duties.php');
+					
+				ob_end_clean();
+			}
 		break;
 	case 'update':
 		if ($_POST)
@@ -89,11 +127,13 @@ switch ($action)
 				$content=ob_get_contents();
 			ob_end_clean();
 		}
-		break;
+	break;
 
 	case 'insert':
+
 		if ($_POST)
 		{
+		
 			$photo_name = renameFile($_FILES['photo']['name'],
 					$_SERVER['DOCUMENT_ROOT']);
 			$destino = $_SERVER['DOCUMENT_ROOT'];
@@ -108,15 +148,22 @@ switch ($action)
 			// header('Location: usuarios.php');
 		}
 		else
+			
 		{
+// 			echo '<pre> $GET';
+// 			print_r($_GET);
+// 			echo '</pre>'.'</BR>';
+			
+// 			echo '<pre> $POST';
+// 			print_r($_POST);
+// 			echo '</pre>'.'</BR>';
+// 			die;
 			ob_start();
-			$content=ob_get_contents();
-			
 			include('../application/views/users/insert.php');
-			
+			$content=ob_get_contents();
 			ob_end_clean();
 		}
-		break;
+	break;
 
 	case 'delete':
 		if($_POST)
@@ -136,7 +183,7 @@ switch ($action)
 				$content=ob_get_contents();
 			ob_end_clean();
 		}
-		break;
+	break;
 
 	case 'select':
 		
@@ -148,7 +195,7 @@ switch ($action)
 		break;
 
 	default:
-		break;
+	break;
 }
 
 // Include Layuout
