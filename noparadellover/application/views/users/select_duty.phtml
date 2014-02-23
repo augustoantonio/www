@@ -11,8 +11,8 @@
 
 
 ?>
-<h2 class="sub-header">/application/views/users/select_project.phtml</h2>
-<a href="?action=insert_project">nuevo proyecto</a>
+<h2 class="sub-header">/application/views/users/select_duty.phtml</h2>
+<a href="?action=insert_duty">nueva tarea</a>
 <br/>
 <table class="table table-striped">
 <?php
@@ -25,9 +25,9 @@ foreach($filas as $key => $fila):?>
 		<?php endforeach; ?>
 
 		<td>
-			<a href="?action=update_duty&id=<?=$fila['iduser'];?>">update</a>
+			<a href="?action=update_duty&id=<?=$fila['iduser'];?>">Update</a>
 				&nbsp;
-			<a href="?action=delete_duty&id=<?=$fila['iduser'];?>">delete</a>
+			<a href="?action=delete_duty&id=<?=$fila['iduser'];?>">Delete</a>
 				&nbsp;
 		</td>
 	</tr>

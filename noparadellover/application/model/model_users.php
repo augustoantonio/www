@@ -2,7 +2,6 @@
 
 
 
-
 function getUsers($config)
 {	
 	$sql="SELECT users.iduser,
@@ -154,6 +153,14 @@ function updateUser($iduser, $data, $config)
 
 function findFields($tablename, $data, $config)
 {
+	
+	
+// 	echo '</pre>';
+// 	$x = array_pop($data);
+// 	echo '<pre> dentro de findfields';
+// 	print_r($data);
+// 	echo '</pre>';
+// 	die;
 	$sql = "DESCRIBE ".$tablename;
 	$link=connectDB($config);
 	selectDB($link, $config);
@@ -192,7 +199,37 @@ function update($tablename, $data, $id, $config)
 
 function insert($tablename, $data, $id, $config)
 {
+// 	echo '<pre> $config';
+// 	print_r($config);
+// 	echo '</pre>';
+// 	echo $tablename."</br>";
+	echo '<pre> $data';
+	print_r($data);
+	echo '</pre>';
+// 	echo $id;
+// 	$configArray
+// 	(
+// 			[host] => localhost
+// 			[user] => root
+// 			[password] =>
+// 			[db] => noparadellover
+// 	)
+	
+// 	noparadellover.duties
+	
+// 	$dataArray
+// 	(
+// 			[dutyid] => 10
+// 			[dutyname] => Consultor
+// 			[submit] => Enviar consulta
+// 	10
+// 	$x = array_pop($data);
+// 	echo '<pre> $data after array pop';
+// 	print_r($data);
+// 	echo '</pre>';
+	
 	$fields= findFields($tablename, $data, $config);
+
 	$sql = "INSERT INTO ".$tablename." SET " ;	
 	foreach($fields[1] as $key => $value)
 	{
@@ -248,6 +285,27 @@ WHERE  noparadellover.teams.users_iduser= ".$id." GROUP BY projectalias;";
 // 	die;
 	return $filas;
 }
+
+/**
+ *
+ * @param unknown $query from $getQuery
+ * @return int index available
+ */
+function getFreeIndex ($query){
+	$start = 1;
+	foreach ($query as $data)
+	{
+		$freeindex = $data['idduty'];
+		if ($freeindex > $start){
+			$indice = $freeindex;
+		}
+
+	}
+	$freeindex= $freeindex +1;
+	return $freeindex;
+}
+
+
 function getQuery ($sql,$config)
 {
 	$query= $sql;

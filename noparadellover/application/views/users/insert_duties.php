@@ -1,53 +1,52 @@
 <?php 
-	print_r($usuario);
 
-?>
-<h2> --- insert_duties.php eo ---</h2>
+// echo '<pre> $filas: ';
+// print_r($filas);
+// echo '</pre>;'
+// print_r ($filas);
+// echo '</pre>';
+// die;
+
+/*
+ * 
+  received into a$filas:
+  Array [0] => Array ( [dutyid] => 1 [dutyname] => aprendiz de CRUD de Proyectos )
+  		[1] => Array ( [dutyid] => 2 [dutyname] => aprendiz de CRUD de Equipos )
+  		[2] => Array ( [dutyid] => 3 [dutyname] => aprendiz de CRUD de Cargos )
+  		[3] => Array ( [dutyid] => 4 [dutyname] => aprendiz de CRUD de empresa )
+  		[4] => Array ( [dutyid] => 5 [dutyname] => director de proyectos )
+  		[5] => Array ( [dutyid] => 6 [dutyname] => ) ) 
+  		
+  		
+  		
+  		<?=$freeindex?>
+ */
+
+
+
+
+
+
+ ?>
+<h2> --- /application/views/users/insert_duties.php ---</h2>
 <form method="post" enctype="multipart/form-data">
+	
+	<LABEL>introduce el nombre para la nueva tarea</LABEL>
 	<ul>
 		<li>
-		
-			Id: <LABEL for="iduser"><?=isset($usuario['iduser'])?$_GET['id']:'-';?></LABEL>
-			
+			Id: <input type="hidden" name="idduty" value="-"/>
 		</li>
+	
 		<li>
-			Username:<LABEL for="username"><?=isset($usuario['username'])?$usuario['username']:'';?> </LABEL>
-		
-		</li>
-		<li>
-			Nombre: <input type="text" name="name" value="<?=isset($usuario['name'])?$usuario['name']:'';?>"/>
-		</li>
-		<li>
-			Apellidos: <input type="text" name="lastname" value="<?=isset($usuario['lastname'])?$usuario['lastname']:'';?>"/>
-		</li>
-		<li>
-			Email: <input type="text" name="email" value="<?=isset($usuario['email'])?$usuario['email']:'';?>"/>
+			<input type="text" name="duty" value=""/>
 		</li>
 
-		<li>
-			Descripcion: <textarea rows="10" cols="10" name="description"><?=isset($usuario['description'])?$usuario['description']:'';?></textarea>
-		</li>
 		
-			</li>
-
-		<li>
-			Proyectos: 
-			<select multiple name="languages[]">
-			<option value="english" <?=(isset($usuario['languages'])&&in_array('english', $usuario['languages']))?'selected':'';?>>English</option>
-			<option value="galego" <?=(isset($usuario['languages'])&&in_array('galego', $usuario['languages']))?'selected':'';?>>Galego</option>
-			<option value="spanish" <?=(isset($usuario['languages'])&&in_array('spanish', $usuario['languages']))?'selected':'';?>>Español</option>
-			</select>
-		</li>
-			
 		<li>
 			Submit: <input type="submit" name="submit"/>
 		</li>
 		<li>
 			Reset: <input type="reset" name="reset"/>
 		</li>
-		<li>
-			Button: <input type="button" name="button" value="Un boton"/>
-		</li>
-	
 	</ul>
 </form>
