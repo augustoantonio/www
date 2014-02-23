@@ -39,14 +39,15 @@ switch ($action)
 		}
 		else
 		{
-			$usuario=getUser($_GET['id'], $config['database']);
-			$filas = getProjects($_GET['id'], $config['db_projects']);
+			
 // 			echo '<pre> $filas';
 // 			print_r($filas);
 // 			echo '</pre>'.'</BR>';
 // 			echo 'aqui llego bien';
 			ob_start();
-			include('select_project.phtml');
+			$usuario=getUser($_GET['id'], $config['database']);
+			$filas = getProjects($_GET['id'], $config['db_projects']);
+			include('../application/views/users/select_project.phtml');
 			$content=ob_get_contents();
 			ob_end_clean();
 		}
