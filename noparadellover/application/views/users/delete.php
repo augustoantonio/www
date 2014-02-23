@@ -1,4 +1,5 @@
-¿Seguro que deseas borrar el usuario?
+
+¿Seguro que deseas borrar?
 <form method="post" enctype="multipart/form-data">
 <ul>
 <li>

@@ -102,13 +102,23 @@ function getLanguages($iduser, $config)
 	return $row['languages'];	
 }
 
+function deleteDuty($tablename, $id, $config)
+{
+	$sql = "DELETE FROM noparadellover.".$tablename." WHERE idduty= ".$id;
+	$link=connectDB($config);
+	selectDB($link, $config);
+	$result=mysqli_query($link, $sql);
+	return;
+}
+
+	
+	
 
 function deleteUser($iduser, $config)
 {
 	deleteUserPets($iduser, $config);
 	deleteUserLanguages($iduser, $config);
 	$sql = "DELETE FROM users WHERE iduser = ".$iduser;
-
 	$link=connectDB($config);
 	selectDB($link, $config);
 	$result=mysqli_query($link, $sql);
@@ -286,24 +296,24 @@ WHERE  noparadellover.teams.users_iduser= ".$id." GROUP BY projectalias;";
 	return $filas;
 }
 
-/**
- *
- * @param unknown $query from $getQuery
- * @return int index available
- */
-function getFreeIndex ($query){
-	$start = 1;
-	foreach ($query as $data)
-	{
-		$freeindex = $data['idduty'];
-		if ($freeindex > $start){
-			$indice = $freeindex;
-		}
+// /**
+//  *
+//  * @param unknown $query from $getQuery
+//  * @return int index available
+//  */
+// function getFreeIndex ($query){
+// 	$start = 1;
+// 	foreach ($query as $data)
+// 	{
+// 		$freeindex = $data['idduty'];
+// 		if ($freeindex > $start){
+// 			$indice = $freeindex;
+// 		}
 
-	}
-	$freeindex= $freeindex +1;
-	return $freeindex;
-}
+// 	}
+// 	$freeindex= $freeindex +1;
+// 	return $freeindex;
+// }
 
 
 function getQuery ($sql,$config)

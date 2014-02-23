@@ -33,7 +33,6 @@ switch ($action)
 // 						[dutyname] => Consultor
 // 						[submit] => Enviar consulta
 //				17:49
-// 				array_pop($_POST)
 // 				echo '<pre> $POST';
 // 				print_r($_POST);
 // 				echo '</pre>'.'</BR>';
@@ -53,7 +52,7 @@ switch ($action)
 		
 					FROM  	noparadellover.duties;";
 				$filas = getQuery($sql, $config['db_projects']);
-				$freeindex = getFreeIndex($filas);
+
 				
 				ob_start();
 				include('../application/views/users/insert_duties.php');
@@ -61,6 +60,31 @@ switch ($action)
 				ob_end_clean();
 			}
 		break;
+		
+		case 'delete_duty':
+			
+			
+			
+			if($_POST)
+			{
+								
+
+				if($_POST['borrar']=="Si")
+				{	
+					
+					deleteDuty('duties', $_GET['id'],$config['db_projects'] );
+				}
+				header('Location: users.php');
+			}
+			else
+			{
+				
+				ob_start();
+				include('../application/views/users/delete.php');
+				$content=ob_get_contents();
+				ob_end_clean();
+			}
+			break;
 		
 		case 'insert':
 		
@@ -114,10 +138,12 @@ switch ($action)
 	
 	// DELETE BLOCK
 
+
 	
 	case 'delete':
 		if($_POST)
 		{
+
 			if($_POST['borrar']=="Si")
 			{
 				deleteUser($_POST['id'],$config['database']);
