@@ -206,13 +206,22 @@ function insert($tablename, $data, $id, $config)
 	return $result;
 }
 
-function getProjects($config)
+/**
+ * Returns an array with active projects for iduser
+ * @param unknown $config
+ * @return array $rows
+ */
+function getProjects($id, $config)
 {
-	$sql="SELECT 	projects.idproject, projects.alias, projects.name,
-						project_types.idproject_type as type,
-						companies.idcompany as company
-FROM projects, project_types, companies
-WHERE projects.idproject = project_types.idproject_type && projects.idproject = companies.idcompany;";
+	$sql="SELECT 	noparadellover.projects.idproject as projectid,
+		noparadellover.projects.alias as projectalias
+		
+	FROM noparadellover.teams, noparadellover.projects,
+			noparadellover.duties
+
+WHERE  noparadellover.teams.users_iduser= ".$id." GROUP BY projectalias;";
+	echo $sql;
+
 
 	$link=connectDB($config);
 	selectDB($link, $config);
@@ -220,17 +229,21 @@ WHERE projects.idproject = project_types.idproject_type && projects.idproject = 
 	// object(mysqli_result)#2 (5) {
 	//	["current_field"]=> int(0)	["field_count"]=> int(5) 
 	//	["lengths"]=> NULL			["num_rows"]=> int(1)	["type"]=> int(0) }
-	// var_dump ($result);
-	// die;
+	var_dump ($result);
+	
 	while ($row=mysqli_fetch_assoc($result))
 	{
-// 		echo '<pre> $row:';
-// 			print_r($row);
-// 		echo '</pre>';
-// 		die;
-// 		$row['pets']=getPets($row['iduser'], $config);
+		foreach($row as $key => $value)
+		{
+			$data[$key] =$value;
+		}
+		
+
+		
+// 		$row['projectid']=getPets($row['iduser'], $config);
 // 		$row['languages']=getLanguages($row['iduser'], $config);
-		$rows[]=$row;
+	$rows[]=$data;
+		
 	}
 	return $rows;
 }

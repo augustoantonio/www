@@ -2,7 +2,7 @@
 	print_r($usuario);
 
 ?>
-<h2> --- insert_duties.php ---</h2>
+<h2> --- insert_duties.php eo ---</h2>
 <form method="post" enctype="multipart/form-data">
 	<ul>
 		<li>

@@ -11,8 +11,8 @@ $config = parse_ini_file('../application/configs/settings.ini', TRUE);
 
 
 // $s = $config['db_projects'];
-// echo '<pre>: $_config:';
-// print_r($s);
+// echo '<pre>: $get:';
+// print_r($_GET);
 // echo '</pre>'.'</br>';
 // die;
 
@@ -82,7 +82,7 @@ switch ($action)
 		break;
 
 	case 'select':
-		$filas=getProjects($config['db_projects']);
+		$filas=getProjects(1,$config['db_projects']);
 		ob_start();
 			include ('../application/views/users/select_project.phtml');
 			$content=ob_get_contents();

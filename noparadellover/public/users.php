@@ -29,7 +29,7 @@ switch ($action)
 		if ($_POST)
 		{
 			
-			insertDuty ('users', $_POST, $_POST['iduser'],$config['databa']);
+			insertDuty ('users', $_POST, $_POST['iduser'],$config['database']);
 			// Saltar a tabla de usuarios
 			// header('Location: http://formularios.local/usuarios.php');
 			echo 'antes del header al users.php';
@@ -40,6 +40,10 @@ switch ($action)
 		else
 		{
 			$usuario=getUser($_GET['id'], $config['database']);
+			$proyectos = getProjects($_GET['id'], $config['db_projects']);
+			echo '<pre> $proyectos';
+			print_r($proyectos);
+			echo '</pre>'.'</BR>';
 			echo 'aqui llego bien';
 			// ob_start();
 			include('/insert_duties.php');
