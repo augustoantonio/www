@@ -84,7 +84,7 @@ switch ($action)
 	case 'select':
 		$filas=getProjects(1,$config['db_projects']);
 		ob_start();
-			include ('../application/views/users/select_project.phtml');
+			include ('select_project.phtml');
 			$content=ob_get_contents();
 		ob_end_clean();
 		break;

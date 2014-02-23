@@ -6,13 +6,13 @@ include ('../application/model/model_uploadfile.php');
 include ('../application/model/model_users.php');
 $config = parse_ini_file('../application/configs/settings.ini', TRUE);
 
-echo '<pre> $GET';
-print_r($_GET);
-echo '</pre>'.'</BR>';
+// echo '<pre> $GET';
+// print_r($_GET);
+// echo '</pre>'.'</BR>';
 
-echo '<pre> $POST';
-print_r($_POST);
-echo '</pre>'.'</BR>';
+// echo '<pre> $POST';
+// print_r($_POST);
+// echo '</pre>'.'</BR>';
 
 if(isset($_GET['action']))
 	$action=$_GET['action'];
@@ -33,26 +33,24 @@ switch ($action)
 			// Saltar a tabla de usuarios
 			// header('Location: http://formularios.local/usuarios.php');
 			echo 'antes del header al users.php';
-			die;
+		
 			header('Location: /users.php');
 			// header('Location: usuarios.php');
 		}
 		else
 		{
 			$usuario=getUser($_GET['id'], $config['database']);
-			$proyectos = getProjects($_GET['id'], $config['db_projects']);
-			echo '<pre> $proyectos';
-			print_r($proyectos);
-			echo '</pre>'.'</BR>';
-			echo 'aqui llego bien';
-			// ob_start();
-			include('/insert_duties.php');
+			$filas = getProjects($_GET['id'], $config['db_projects']);
+// 			echo '<pre> $filas';
+// 			print_r($filas);
+// 			echo '</pre>'.'</BR>';
+// 			echo 'aqui llego bien';
+			ob_start();
+			include('select_project.phtml');
 			$content=ob_get_contents();
-			//ob_end_clean();
-			// aqui llega
-	
+			ob_end_clean();
 		}
-// 		break;
+		break;
 	case 'update':
 		if ($_POST)
 		{

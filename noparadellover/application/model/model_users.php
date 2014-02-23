@@ -220,7 +220,7 @@ function getProjects($id, $config)
 			noparadellover.duties
 
 WHERE  noparadellover.teams.users_iduser= ".$id." GROUP BY projectalias;";
-	echo $sql;
+	
 
 
 	$link=connectDB($config);
@@ -229,21 +229,22 @@ WHERE  noparadellover.teams.users_iduser= ".$id." GROUP BY projectalias;";
 	// object(mysqli_result)#2 (5) {
 	//	["current_field"]=> int(0)	["field_count"]=> int(5) 
 	//	["lengths"]=> NULL			["num_rows"]=> int(1)	["type"]=> int(0) }
-	var_dump ($result);
-	
+// 	var_dump ($result);
+// 	die;
 	while ($row=mysqli_fetch_assoc($result))
 	{
-		foreach($row as $key => $value)
-		{
-			$data[$key] =$value;
-		}
-		
+
+			$filas[] =$row;
+
 
 		
 // 		$row['projectid']=getPets($row['iduser'], $config);
 // 		$row['languages']=getLanguages($row['iduser'], $config);
-	$rows[]=$data;
 		
 	}
-	return $rows;
+// 	echo '<pre>: $rows:';
+// 	print_r($data);
+// 	echo '</pre>'.'</br>';
+// 	die;
+	return $filas;
 }
