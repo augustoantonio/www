@@ -21,6 +21,29 @@ else
 
 switch ($action)
 {
+	
+	
+		case 'insert_duty2user':
+			
+			if($_POST)
+			{
+				
+				
+			}
+			else 
+			{
+				// TODO: adapt functions to take sql queries from .txt
+				$sql = 
+				$filas = getQuery($sql, $config['db_projects']);
+				ob_start();
+				include('../application/views/users/insert_dutyuser.php');
+				$content=ob_get_contents();
+				ob_end_clean();				
+				
+			}
+			
+		break;
+	
 		case 'insert_duty':
 		
 			if ($_POST)
