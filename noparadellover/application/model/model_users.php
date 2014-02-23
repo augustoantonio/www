@@ -211,7 +211,7 @@ function insert($tablename, $data, $id, $config)
  * @param unknown $config
  * @return array $rows
  */
-function getProjects($id, $config)
+function getProjectsperId($id, $config)
 {
 	$sql="SELECT 	noparadellover.projects.idproject as projectid,
 		noparadellover.projects.alias as projectalias
@@ -248,3 +248,78 @@ WHERE  noparadellover.teams.users_iduser= ".$id." GROUP BY projectalias;";
 // 	die;
 	return $filas;
 }
+function getQuery ($sql,$config)
+{
+	$query= $sql;
+	$link=connectDB($config);
+	selectDB($link, $config);
+	$result=mysqli_query($link, $query);
+	// object(mysqli_result)#2 (5) {
+	//	["current_field"]=> int(0)	["field_count"]=> int(5)
+	//	["lengths"]=> NULL			["num_rows"]=> int(1)	["type"]=> int(0) }
+	// 	var_dump ($result);
+	// 	die;
+	while ($row=mysqli_fetch_assoc($result))
+	{
+
+		$filas[] =$row;
+
+
+
+		// 		$row['projectid']=getPets($row['iduser'], $config);
+		// 		$row['languages']=getLanguages($row['iduser'], $config);
+
+	}
+	// 	echo '<pre>: $rows:';
+	// 	print_r($data);
+	// 	echo '</pre>'.'</br>';
+	// 	die;
+	return $filas;
+}
+
+// function getProjects($config)
+// {
+// 	$sql="SELECT 	noparadellover.projects.idproject as projectid,
+// 					noparadellover.projects.alias as projectalias,
+// 					noparadellover.projects.idproject as projectid,
+// 					noparadellover.projects.alias as projectalias,
+// 					noparadellover.projects.idproject as projectid,
+// 					noparadellover.projects.alias as projectalias,
+// 					noparadellover.projects.idproject as projectid,
+// 					noparadellover.projects.alias as projectalias,
+// 					noparadellover.projects.idproject as projectid,
+// 					noparadellover.projects.alias as projectalias,
+// 					noparadellover.
+			
+// 	FROM  noparadellover.projects,noparadellover.project_types, noparadellover.companies
+// 			noparadellover.duties
+
+// WHERE  noparadellover.teams.users_iduser= ".$id." GROUP BY projectalias;";
+
+
+
+// 	$link=connectDB($config);
+// 	selectDB($link, $config);
+// 	$result=mysqli_query($link, $sql);
+// 	// object(mysqli_result)#2 (5) {
+// 	//	["current_field"]=> int(0)	["field_count"]=> int(5)
+// 	//	["lengths"]=> NULL			["num_rows"]=> int(1)	["type"]=> int(0) }
+// 	// 	var_dump ($result);
+// 	// 	die;
+// 	while ($row=mysqli_fetch_assoc($result))
+// 	{
+
+// 		$filas[] =$row;
+
+
+
+// 		// 		$row['projectid']=getPets($row['iduser'], $config);
+// 		// 		$row['languages']=getLanguages($row['iduser'], $config);
+
+// 	}
+// 	// 	echo '<pre>: $rows:';
+// 	// 	print_r($data);
+// 	// 	echo '</pre>'.'</br>';
+// 	// 	die;
+// 	return $filas;
+// }

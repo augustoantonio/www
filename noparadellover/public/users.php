@@ -19,13 +19,35 @@ if(isset($_GET['action']))
 else
 	$action='select';
 
-echo $action;
-		
 switch ($action)
 {
+	case 'select_project':
+		// TODO: move all sql query to setting.ini as an array with action as key
+		
+		$sql = "SELECT		noparadellover.projects.idproject as projectid,
+			noparadellover.projects.alias as projectalias,
+			noparadellover.projects.name as projectname,
+			noparadellover.projects.tweet as projecttweet,
+			noparadellover.projects.budget as projectbudget,
+			noparadellover.projects.date_ini as projectdateini,
+			noparadellover.projects.date_fini as projectfini,
+			noparadellover.projects.description as projectdescription,
+			noparadellover.duties.duty as projectduties,
+			noparadellover.companies.name as projectcompany
+
+	FROM  	noparadellover.projects, noparadellover.duties,
+			noparadellover.companies
+	GROUP BY noparadellover.projects.alias;";
 	
-	
-	case 'insert_duty':
+		$filas = getQuery($sql, $config['db_projects']);
+		// $filas=getProjectsperId(1,$config['db_projects']);
+		ob_start();
+		include ('../application/views/users/select_project.phtml');
+		$content=ob_get_contents();
+		ob_end_clean();
+		break;
+		
+	case 'select_duty':
 		if ($_POST)
 		{
 			
@@ -39,17 +61,17 @@ switch ($action)
 		}
 		else
 		{
-			
-// 			echo '<pre> $filas';
-// 			print_r($filas);
-// 			echo '</pre>'.'</BR>';
-// 			echo 'aqui llego bien';
+			$sql = "SELECT 		noparadellover.duties.idduty as dutyid,
+			noparadellover.duties.duty	as dutyname
+				
+	FROM  	noparadellover.duties;";
+			$filas = getQuery($sql, $config['db_projects']);
+			// $filas=getProjectsperId(1,$config['db_projects']);
 			ob_start();
-			$usuario=getUser($_GET['id'], $config['database']);
-			$filas = getProjects($_GET['id'], $config['db_projects']);
-			include('../application/views/users/select_project.phtml');
+			include ('../application/views/users/select_project.phtml');
 			$content=ob_get_contents();
 			ob_end_clean();
+			break;
 		}
 		break;
 	case 'update':
@@ -88,8 +110,10 @@ switch ($action)
 		else
 		{
 			ob_start();
-			include('../application/views/users/insert.php');
 			$content=ob_get_contents();
+			
+			include('../application/views/users/insert.php');
+			
 			ob_end_clean();
 		}
 		break;
@@ -115,6 +139,7 @@ switch ($action)
 		break;
 
 	case 'select':
+		
 		$filas=getUsers($config['database']);
 		ob_start();
 			include ('../application/views/users/select.phtml');

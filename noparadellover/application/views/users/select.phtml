@@ -1,18 +1,20 @@
 
-
-
 <h2 class="sub-header">Usuarios</h2>
-<a href="?action=insert">Insertar Usuario</a>
+<a href="?action=insert">Insertar</a>
 <br/>
 <table class="table table-striped">
 <?php
 
 foreach($filas as $key => $fila):?>
 	<tr>
-		<?php 
-		$image = $fila['photo'];
-		unset($fila['photo']);
-		foreach ($fila as $columna):?>
+		 <?php 
+
+			$image = $fila['photo'];
+			unset($fila['photo']);;
+		 	
+		 ?>
+
+		<?php foreach ($fila as $columna):?>
 			<td><?=$columna;?></td>
 		<?php endforeach; ?>
 		<td>
