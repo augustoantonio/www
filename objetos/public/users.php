@@ -22,16 +22,26 @@ switch ($action)
 			if($_POST)
 			{
 			if($_POST['borrar']=="Si")
-			{	
-				deleteDuty('duties', $_GET['id'],$config['db_projects'] );
+			{
+echo '<pre> $_POST: ';
+print_r($_POST);
+echo '</pre>';
+				$obj = new model_mappers_db($config['db_noparadellover']);
+				$obj->delete('duties', $_POST['id'],$config['db_noparadellover']);
+				// TODO: delete image			
+				// deleteDuty('duties', $_GET['id'],$config['db_projects'] );
 			}
 				header('Location: users.php');
 			}
 			else
 			{
+			
 				
+			$obj = new model_duties($config['db_noparadellover']);
+			$filas = $obj->getQuery($config['db_noparadellover']);
+			
 				ob_start();
-				include('../application/views/users/delete.php');
+				include('../application/views/duties/delete.php');
 				$content=ob_get_contents();
 				ob_end_clean();
 			}
@@ -86,7 +96,6 @@ switch ($action)
 	case 'select_duty':
 
 			$obj = new model_duties($config['db_noparadellover']);
-			// $filas=getProjectsperId(1,$config['db_projects']);
 			$filas = $obj->getQuery($config['db_noparadellover']);
 			ob_start();
 			include ('../application/views/duties/select.phtml');

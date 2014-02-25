@@ -80,4 +80,19 @@ class model_mappers_db
 		$result=mysqli_query($this->link, $sql);
 		return $result;
 	}
+	function delete($tablename, $id, $config)
+	{
+		$sql = "DESCRIBE ".$tablename;
+		$tableindex =mysqli_query($this->link, $sql);
+		while ($row=mysqli_fetch_assoc($tableindex))
+		{
+			$fields[]=$row['Field'];
+			if($row['Key']=='PRI')
+				$pkey = $row['Field'];
+		}
+
+		$sql = "DELETE FROM ".$tablename." WHERE ".$fields[0]." = ".$id;
+		$result=mysqli_query($this->link, $sql);
+		return $result;
+	}
 }
