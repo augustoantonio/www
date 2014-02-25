@@ -1,0 +1,33 @@
+<h2 class="sub-header">/application/views/users/select_duty.phtml</h2>
+
+// <?php
+// echo '<pre> $filas: ';
+// print_r($filas);
+// echo '</pre>';
+// 
+// echo '<pre> $get: ';
+// print_r($_GET);
+// echo '</pre>';
+// ?>
+
+<a href="?action=insert_duty&id=<?=$fila['idduty'];?>">nueva tarea</a>
+<br/>
+<table class="table table-striped">
+<?php
+
+foreach($filas as $key => $fila):?>
+	<tr>
+		<?php 
+		foreach ($fila as $columna):?>
+			<td><?=$columna;?></td>
+		<?php endforeach; ?>
+
+		<td>
+			<a href="?action=update_duty&id=<?=$fila['idduty'];?>">Update</a>
+				&nbsp;
+			<a href="?action=delete_duty&id=<?=$fila['idduty'];?>">Delete</a>
+				&nbsp;
+		</td>
+	</tr>
+<?php endforeach ?>
+</table>

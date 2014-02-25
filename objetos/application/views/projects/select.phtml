@@ -1,0 +1,22 @@
+<h2 class="sub-header">/application/views/users/projects/select.phtml</h2>
+<a href="?action=insert_duty">nuevo proyecto</a>
+<br/>
+<table class="table table-striped">
+<?php
+
+foreach($filas as $key => $fila):?>
+	<tr>
+		<?php 
+		foreach ($fila as $columna):?>
+			<td><?=$columna;?></td>
+		<?php endforeach; ?>
+
+		<td>
+			<a href="?action=update_duty&id=<?=$fila['idproject'];?>">Update</a>
+				&nbsp;
+			<a href="?action=delete_duty&id=<?=$fila['idproject'];?>">Delete</a>
+				&nbsp;
+		</td>
+	</tr>
+<?php endforeach ?>
+</table>
