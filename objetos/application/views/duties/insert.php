@@ -11,16 +11,7 @@
 
 // recorrer RECORDSET
 // hacer FUNCION.
-foreach ($filas as $key => $value)
-{
-// cada $value es un array de valores si le decimos que
-// cuando coincida la clave de recorrido con el valor que le digamos
-// guarde el contenido del campo duty en la variable $
-	if (!$key==$_GET['id']) {
-		$duty2update= $value['duty'];
-		//var_dump($value);
-	}
-}
+
 
 
 
@@ -52,7 +43,7 @@ foreach ($filas as $key => $value)
 		</li>
 	
 		<li>
-			<input type="text" name="duty" value="<?=$duty2update?>"/>
+			<input type="text" name="duty" value=""/>
 		</li>
 
 		

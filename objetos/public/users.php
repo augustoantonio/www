@@ -37,27 +37,6 @@ switch ($action)
 			}
 			break;	
 	
-		case 'insert_duty2user':
-			
-			if($_POST)
-			{
-				
-				
-			}
-			else 
-			{
-				// TODO: adapt functions to take sql queries from .txt
-				$sql = 
-				$filas = getQuery($sql, $config['db_projects']);
-				ob_start();
-				include('../application/views/users/insert_dutyuser.php');
-				$content=ob_get_contents();
-				ob_end_clean();				
-				
-			}
-			
-		break;
-	
 		case 'insert_duty':
 		
 			if ($_POST)
@@ -74,24 +53,30 @@ switch ($action)
 // 				print_r($_POST);
 // 				echo '</pre>'.'</BR>';
 // 				die;
-				insert('noparadellover.duties', $_POST,$_POST['idduty'], $config['db_projects']);
+				$obj = new model_mappers_db($config['db_noparadellover']);
+				$obj->insert('duties', $_POST, $_POST['idduty'],$config['db_noparadellover']);
+				header('Location: /users.php');
+
+				// insert('noparadellover', $_POST,$_POST['idduty'], $config['db_projects']);
 				// Saltar a tabla de usuarios
 				// header('Location: http://formularios.local/usuarios.php');
-				header('Location: users.php');
+				// header('Location: users.php');
 				// header('Location: usuarios.php');
 			}
 			else
 			{
 				
-				// this else was checked at 14.02.23 15.00. working.
-				$sql = "SELECT 	noparadellover.duties.idduty as idduty,
-							noparadellover.duties.duty	as duty
-		
-					FROM  	noparadellover.duties;";
-				$filas = getQuery($sql, $config['db_projects']);
-
+				// foreach ($filas as $key => $value)
+				// {
+// 
+					// if (!$key==$_GET['id'])
+					// {
+						// $duty2update= $value['duty'];
+						// //var_dump($value);
+					// }
+				// }
 				ob_start();
-				include('../application/views/users/insert_duties.php');
+				include('../application/views/duties/insert.php');
 				$content=ob_get_contents();	
 				ob_end_clean();
 			}
