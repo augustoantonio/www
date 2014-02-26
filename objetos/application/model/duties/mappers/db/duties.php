@@ -12,11 +12,41 @@ class model_duties_mappers_db_duties extends model_mappers_db
 		$this->link = parent::__construct($config);		
 	}
 
-public function getQuery ($config)
+public function getQuery ($action, $config)
 {
-	$sql = "SELECT 	noparadellover.duties.idduty as idduty,
+
+	switch ($action) {
+		// case 'select_duty':
+// 			
+			// $sql = "SELECT 	noparadellover.duties.idduty as idduty,
+							// noparadellover.duties.duty	as duty
+					// FROM  	noparadellover.duties;";	
+			// break;
+// 		
+
+		// case 'update_duty';
+// 			
+			// $sql = "SELECT 	noparadellover.duties.idduty as idduty,
+								// noparadellover.duties.duty	as duty
+// 			
+// 			
+								// FROM  	noparadellover.duties;";
+		// break;
+// 		
+		case 'delete_duty':
+			return;
+			
+		break;
+		
+		default:
+			echo $action;
+
+			$sql = "SELECT 	noparadellover.duties.idduty as idduty,
 							noparadellover.duties.duty	as duty
-					FROM  	noparadellover.duties;";
+					FROM  	noparadellover.duties;";	
+		break;
+	}	
+
 	$result=mysqli_query($this->link, $sql);
 	
 	

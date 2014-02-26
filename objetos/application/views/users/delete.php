@@ -1,4 +1,6 @@
-¿Seguro que deseas borrar el usuario?
+<h2 class="sub-header">/views/users/delete.php</h2>
+
+Â¿desea borrar el usuario?
 <form method="post" enctype="multipart/form-data">
 <ul>
 <li>

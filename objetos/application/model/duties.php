@@ -18,9 +18,9 @@ class model_duties implements model_dutiesInterface
 		
 	}
 	
-	public function getQuery($config)
+	public function getQuery($action, $config)
 	{
-		return $this -> mapper -> getQuery($config);				
+		return $this -> mapper -> getQuery($action, $config);				
 	}
 	
 	public function deleteDuty($id, $config)

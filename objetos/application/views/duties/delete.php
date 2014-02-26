@@ -1,17 +1,9 @@
-<!-- // <?php
-// echo '<pre> $_GET: ';
-// print_r($_GET);
-// echo '</pre>';
-// ?> -->
-<h2 class="sub-header">/application/views/duties/delete.phtml</h2>
+<h2 class="sub-header">/views/duties/delete.phtml</h2>
 <form method="post" enctype="multipart/form-data">
 <ul>
 <li>
 Id: <input type="hidden" name="id" value="<?=$_GET['id']?>"/>
 </li>
-<!-- <li>
-Username: <?=isset($usuario['username'])?$usuario['username']:'';?>
-</li> -->
 
 <li>
 Si: <input type="submit" name="borrar" value="Si"/>

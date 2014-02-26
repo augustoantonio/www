@@ -1,3 +1,4 @@
+ <h2 class="sub-header">/views/users/   insert.php y update.php</h2>
 <form method="post" enctype="multipart/form-data">
 	<ul>
 		<li>
@@ -25,7 +26,7 @@
 			Ciudad: <select name="cities_idcity">
 			<option value="1" <?=(isset($usuario['cities_idcity'])&&$usuario['cities_idcity']=='santiago')?'selected':'';?>>Santiago</option>
 			<option value="2" <?=(isset($usuario['cities_idcity'])&&$usuario['cities_idcity']=='vigo')?'selected':'';?>>Vigo</option>
-			<option value="3" <?=(isset($usuario['cities_idcity'])&&$usuario['cities_idcity']=='acoruña')?'selected':'';?>>A Coruña</option>
+			<option value="3" <?=(isset($usuario['cities_idcity'])&&$usuario['cities_idcity']=='acoruï¿½a')?'selected':'';?>>A Coruï¿½a</option>
 			</select>
 		</li>
 		
@@ -47,7 +48,7 @@
 			<select multiple name="languages[]">
 			<option value="english" <?=(isset($usuario['languages'])&&in_array('english', $usuario['languages']))?'selected':'';?>>English</option>
 			<option value="galego" <?=(isset($usuario['languages'])&&in_array('galego', $usuario['languages']))?'selected':'';?>>Galego</option>
-			<option value="spanish" <?=(isset($usuario['languages'])&&in_array('spanish', $usuario['languages']))?'selected':'';?>>Español</option>
+			<option value="spanish" <?=(isset($usuario['languages'])&&in_array('spanish', $usuario['languages']))?'selected':'';?>>Espaï¿½ol</option>
 			</select>
 		</li>
 		<li>
